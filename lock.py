@@ -60,7 +60,7 @@ class Fullscreen_Window:
         
     def show_idle(self):
        	self.image = tk.PhotoImage(file="nsticon2.png")
-	self.photoLabel = ttk.Label(self.tk, image=self.image)
+	self.photoLabel = ttk.Label(self.tk, image=self.image, background='black')
 	self.photoLabel.place(x=-1, y=-1, anchor='nw')
 	self.welcomeLabel = ttk.Label(self.tk, text="Please Present Your Badge", background='black', foreground='white')
         self.welcomeLabel.config(font='size, 40', justify='center', anchor='center',) 
@@ -143,7 +143,7 @@ class Fullscreen_Window:
                         cur.execute("INSERT INTO access_log SET rfid_presented = '%s', rfid_presented_datetime = NOW(), rfid_granted = 0" % (data))
                         dbConnection.commit()
                         
-			time.sleep(1)
+			time.sleep(.5)
                         self.welcomeLabel.grid_forget()
                         #self.pin_entry_forget() 
 			#self.PINresultLabel.grid_forget() 
@@ -156,8 +156,8 @@ class Fullscreen_Window:
                         self.validUser.grid(columnspan=3)
                         
                         self.image = tk.PhotoImage(file=user_info['image'] + ".gif")
-                        self.photoLabel = ttk.Label(self.tk, image=self.image)
-                        self.photoLabel.grid(columnspan=3)
+                        self.photoLabel = ttk.Label(self.tk, image=self.image, background='black')
+                        self.photoLabel.grid(columnspan=1)
                         
                         self.enterPINlabel = ttk.Label(self.tk, text="Please enter your PIN:", font='size, 18', justify='center', anchor='center', background='black', foreground='white')
                         self.enterPINlabel.grid(columnspan=3)
@@ -332,7 +332,7 @@ class Fullscreen_Window:
 				self.SMSresultLabel.config(font='size, 40', justify='center', anchor='center')
 				self.SMSresultLabel.grid(sticky=tk.W+tk.E+tk.N+tk.S, pady='200')
 				
-				self.SMSenteredtimeout = threading.Timer(1, self.returnToIdle_fromSMSentered)
+				self.SMSenteredtimeout = threading.Timer(.5, self.returnToIdle_fromSMSentered)
 				self.SMSenteredtimeout.start()
 				
 	#def sendSMScode(self, mobileNumber):
